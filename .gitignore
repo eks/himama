@@ -38,3 +38,4 @@ yarn-debug.log*
 # Vgnore Vim swap and history files
 *.un*
 *.sw*
+coverage
