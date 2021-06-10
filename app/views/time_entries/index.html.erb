@@ -4,6 +4,7 @@
     <th>Day</th>
     <th>Clock In</th>
     <th>Clock Out</th>
+    <th>Duration</th>
     <th>In Progress?</th>
   </thead>
   <tbody>
@@ -12,6 +13,7 @@
         <td><%= entry.day %></td>
         <td><%= Time.zone.at(entry.start_at).strftime('%H:%m:%S') %></td>
         <td><%= Time.zone.at(entry.end_at).strftime('%H:%m:%S') %></td>
+        <td><%= entry.duration %></td>
         <td><%= entry.in_progress? %></td>
       </tr>
     <% end %>
