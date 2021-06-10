@@ -4,14 +4,16 @@
     <th>Day</th>
     <th>Clock In</th>
     <th>Clock Out</th>
+    <th>In Progress?</th>
   </thead>
   <tbody>
-<% @entries.each do |entry| %>
-  <tr>
-    <td><%= entry.day %></td>
-    <td><%= Time.zone.at(entry.start_at) %></td>
-    <td><%= Time.zone.at(entry.end_at) %></td>
-  </tr>
-<% end %>
+    <% @entries.each do |entry| %>
+      <tr>
+        <td><%= entry.day %></td>
+        <td><%= Time.zone.at(entry.start_at).strftime('%H:%m:%S') %></td>
+        <td><%= Time.zone.at(entry.end_at).strftime('%H:%m:%S') %></td>
+        <td><%= entry.in_progress? %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
