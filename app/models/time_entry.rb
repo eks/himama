@@ -8,4 +8,23 @@ class TimeEntry < ApplicationRecord
   def in_progress?
     (self.start_at - self.end_at) === 0
   end
+
+  def duration
+    return 0 if self.in_progress?
+
+    humanize(self.end_at - self.start_at)
+  end
+
+  private
+
+  def humanize(secs)
+    return 0 if secs <= 0
+
+    [[60, :seconds], [60, :minutes], [24, :hours], [Float::INFINITY, :days]].map do |count, name|
+      # The divmod() function in Ruby returns integer division value and the remainder.
+      secs, remainder = secs.divmod(count)
+
+      "#{remainder.to_i} #{name}" unless remainder.to_i==0
+    end.compact.reverse.join(' ')
+  end
 end

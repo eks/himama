@@ -52,4 +52,22 @@ RSpec.describe TimeEntry, type: :model do
       end
     end
   end
+
+  describe '#duration' do
+    context 'when in progress' do
+      before do
+        time_entry.end_at = time_entry.start_at
+      end
+
+      it 'returns zero' do
+        expect(time_entry.duration).to be_zero
+      end
+    end
+
+    context 'when not in progress' do
+      it 'returns time elapsed' do
+        expect(time_entry.duration).to eq('4 hours')
+      end
+    end
+  end
 end
