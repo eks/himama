@@ -34,20 +34,6 @@ RSpec.describe User, type: :model do
 
       expect(user.email).to eq('uppercase@email.com')
     end
-
-    it 'validates first_name presence' do
-      user = build(:user, first_name: nil)
-
-      expect(user).to be_invalid
-      expect(user.errors.messages[:first_name]).to include("can't be blank")
-    end
-
-    it 'validates last_name presence' do
-      user = build(:user, last_name: nil)
-
-      expect(user).to be_invalid
-      expect(user.errors.messages[:last_name]).to include("can't be blank")
-    end
   end
 
   describe '#full_name' do
