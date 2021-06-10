@@ -1,0 +1,17 @@
+<h1>TimeEntries</h1>
+<table>
+  <thead>
+    <th>Day</th>
+    <th>Clock In</th>
+    <th>Clock Out</th>
+  </thead>
+  <tbody>
+<% @entries.each do |entry| %>
+  <tr>
+    <td><%= entry.day %></td>
+    <td><%= Time.zone.at(entry.start_at) %></td>
+    <td><%= Time.zone.at(entry.end_at) %></td>
+  </tr>
+<% end %>
+  </tbody>
+</table>
