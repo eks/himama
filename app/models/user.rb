@@ -13,6 +13,8 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX }
   validates :first_name, :last_name, presence: true
 
+  has_many :time_entries
+
   def full_name
     "#{first_name} #{last_name}"
   end
