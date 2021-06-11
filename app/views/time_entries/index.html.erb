@@ -17,8 +17,8 @@
       <tr>
         <td><%= entry.day %></td>
         <td><%= entry.start_time %></td>
-        <td><%= entry.end_time %></td>
-        <td><%= entry.duration %></td>
+        <td><%= end_time_helper(entry) %></td>
+        <td><%= duration_helper(entry) %></td>
         <td><%= entry.in_progress? %></td>
       </tr>
     <% end %>
