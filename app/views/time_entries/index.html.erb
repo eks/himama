@@ -1,4 +1,9 @@
 <h1>TimeEntries</h1>
+
+<%= form_with(model: TimeEntry.new, local: true) do |f| %>
+  <%= f.submit %>
+<% end %>
+
 <table>
   <thead>
     <th>Day</th>
@@ -11,8 +16,8 @@
     <% @entries.each do |entry| %>
       <tr>
         <td><%= entry.day %></td>
-        <td><%= Time.zone.at(entry.start_at).strftime('%H:%m:%S') %></td>
-        <td><%= Time.zone.at(entry.end_at).strftime('%H:%m:%S') %></td>
+        <td><%= entry.start_at %></td>
+        <td><%= entry.end_at %></td>
         <td><%= entry.duration %></td>
         <td><%= entry.in_progress? %></td>
       </tr>
