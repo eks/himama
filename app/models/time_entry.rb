@@ -16,11 +16,11 @@ class TimeEntry < ApplicationRecord
   end
 
   def start_time
-    Time.zone.at(self.start_at).strftime('%H:%m:%S')
+    Time.zone.at(self.start_at).strftime('%H:%M:%S')
   end
 
   def end_time
-    Time.zone.at(self.end_at).strftime('%H:%m:%S')
+    Time.zone.at(self.end_at).strftime('%H:%M:%S')
   end
 
   private
