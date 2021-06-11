@@ -7,7 +7,7 @@ class TimeEntriesController < ApplicationController
   end
 
   def create
-    if !current_user.time_entries.last.in_progress?
+    if !current_user.time_entries.last&.in_progress? || current_user.time_entries.last.nil?
       @entry = current_user.time_entries.new
       @entry.day = @date.strftime('%Y-%m-%d')
       @entry.start_at = @date.to_i
@@ -28,12 +28,13 @@ class TimeEntriesController < ApplicationController
 
   def update
     if @entry.update(
-        start_at: parse_time(time_entry_params[:start_time]),
-        end_at: parse_time(time_entry_params[:end_time])
+        start_at: parse_time(@entry, time_entry_params[:start_time]),
+        end_at: parse_time(@entry, time_entry_params[:end_time])
     )
-      redirect_to time_entries_path
+      redirect_to time_entries_path, success: 'Entry update successfuly'
     else
-      redirect_to edit_time_entry_path(@entry)
+      flash[:error] = @entry.errors.full_messages
+      render :edit
     end
   end
 
@@ -51,7 +52,7 @@ class TimeEntriesController < ApplicationController
     params.require(:time_entry).permit(:start_time, :end_time)
   end
 
-  def parse_time(time)
-    Time.zone.parse("#{@entry.day} #{time}").to_i
+  def parse_time(entry, time)
+    Time.zone.parse("#{entry.day} #{time}").to_i
   end
 end

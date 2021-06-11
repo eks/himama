@@ -46,6 +46,9 @@ RSpec.describe 'TimeEntries', type: :request do
     let(:new_attributes) do
       { start_time: '00:00:01', end_time: '00:00:05' }
     end
+    let(:invalid_attributes) do
+      { start_time: '00:00:05', end_time: '00:00:01' }
+    end
 
     it 'updates the requested time_entry' do
       time_entry = create(:time_entry, user: user, start_at: 1623369600, end_at: 1623369602 )
@@ -57,5 +60,13 @@ RSpec.describe 'TimeEntries', type: :request do
       expect(response).to redirect_to(time_entries_url)
     end
 
+    it 'does not update the time_entry' do
+      time_entry = create(:time_entry, user: user, start_at: 1623369600, end_at: 1623369602 )
+
+      patch time_entry_url(time_entry), params: { time_entry: invalid_attributes }
+      time_entry.reload
+      expect(time_entry.start_at).to eq(1623369600)
+      expect(time_entry.end_at).to eq(1623369602)
+    end
   end
 end
