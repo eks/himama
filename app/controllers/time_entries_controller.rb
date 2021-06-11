@@ -19,17 +19,17 @@ class TimeEntriesController < ApplicationController
       flash_message = 'Clock Out created successfuly'
     end
 
-    if @entry.save
-      flash[:success] = flash_message
-    end
+    flash[:success] = flash_message if @entry.save
 
     redirect_to time_entries_path
   end
 
+  def edit; end
+
   def update
     if @entry.update(
-        start_at: parse_time(@entry, time_entry_params[:start_time]),
-        end_at: parse_time(@entry, time_entry_params[:end_time])
+      start_at: parse_time(@entry, time_entry_params[:start_time]),
+      end_at: parse_time(@entry, time_entry_params[:end_time])
     )
       redirect_to time_entries_path, success: 'Entry update successfuly'
     else
