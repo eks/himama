@@ -16,8 +16,8 @@
     <% @entries.each do |entry| %>
       <tr>
         <td><%= entry.day %></td>
-        <td><%= entry.start_at %></td>
-        <td><%= entry.end_at %></td>
+        <td><%= entry.start_time %></td>
+        <td><%= entry.end_time %></td>
         <td><%= entry.duration %></td>
         <td><%= entry.in_progress? %></td>
       </tr>

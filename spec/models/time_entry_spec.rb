@@ -70,4 +70,16 @@ RSpec.describe TimeEntry, type: :model do
       end
     end
   end
+
+  describe '#start_time' do
+    it 'returns clock in extracted from start_at' do
+      expect(time_entry.start_time).to eq(Time.zone.at(time_entry.start_at).strftime('%H:%m:%S'))
+    end
+  end
+
+  describe '#end_time' do
+    it 'returns clock in extracted from start_at' do
+      expect(time_entry.end_time).to eq(Time.zone.at(time_entry.end_at).strftime('%H:%m:%S'))
+    end
+  end
 end

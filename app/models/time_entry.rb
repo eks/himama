@@ -15,6 +15,14 @@ class TimeEntry < ApplicationRecord
     humanize(self.end_at - self.start_at)
   end
 
+  def start_time
+    Time.zone.at(self.start_at).strftime('%H:%m:%S')
+  end
+
+  def end_time
+    Time.zone.at(self.end_at).strftime('%H:%m:%S')
+  end
+
   private
 
   def humanize(secs)
