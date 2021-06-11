@@ -11,6 +11,7 @@
     <th>Clock Out</th>
     <th>Duration</th>
     <th>In Progress?</th>
+    <th>Actions</th>
   </thead>
   <tbody>
     <% @entries.each do |entry| %>
@@ -20,6 +21,7 @@
         <td><%= end_time_helper(entry) %></td>
         <td><%= duration_helper(entry) %></td>
         <td><%= entry.in_progress? %></td>
+        <td><%= edit_link_helper(entry) %></td>
       </tr>
     <% end %>
   </tbody>

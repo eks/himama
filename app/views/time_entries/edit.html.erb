@@ -1,0 +1,12 @@
+<h1>Time Entry <%= @entry.id %> on day <%= @entry.day %></h1>
+
+<%= form_with(model: @entry, local: true) do |f| %>
+  <%= f.label :start_time %>
+  <%= f.time_field :start_time, value: @entry.start_time %>
+
+  <%= f.label :end_time %>
+  <%= f.time_field :end_time, value: @entry.end_time %>
+
+  <%= f.submit %>
+  <%= link_to 'Cancel', time_entries_path %>
+<% end %>

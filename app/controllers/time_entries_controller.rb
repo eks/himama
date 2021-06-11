@@ -1,5 +1,6 @@
 class TimeEntriesController < ApplicationController
   before_action :set_date, only: [:create]
+  before_action :set_time_entry, only: [:edit, :update]
 
   def index
     @entries = current_user.time_entries
@@ -25,9 +26,32 @@ class TimeEntriesController < ApplicationController
     redirect_to time_entries_path
   end
 
+  def update
+    if @entry.update(
+        start_at: parse_time(time_entry_params[:start_time]),
+        end_at: parse_time(time_entry_params[:end_time])
+    )
+      redirect_to time_entries_path
+    else
+      redirect_to edit_time_entry_path(@entry)
+    end
+  end
+
   private
 
   def set_date
     @date = Time.zone.now
+  end
+
+  def set_time_entry
+    @entry = TimeEntry.find_by(id: params[:id], user: current_user)
+  end
+
+  def time_entry_params
+    params.require(:time_entry).permit(:start_time, :end_time)
+  end
+
+  def parse_time(time)
+    Time.zone.parse("#{@entry.day} #{time}").to_i
   end
 end
